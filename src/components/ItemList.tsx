@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone';
-import { List } from 'office-ui-fabric-react/lib/List';
-import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
+// import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone';
+// import { List } from 'office-ui-fabric-react/lib/List';
+// import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
 
 export interface IconListProps {
   items: any[];
@@ -11,7 +11,14 @@ export default class ItemList extends React.Component<IconListProps, {}> {
   constructor(props: IconListProps) {
     super(props);
   }
+  public render(): JSX.Element {
+    const { items } = this.props;
 
+    return (
+      <h1>{items}</h1>
+    );
+  }
+  /*
   public render(): JSX.Element {
     const { items } = this.props;
 
@@ -41,4 +48,5 @@ export default class ItemList extends React.Component<IconListProps, {}> {
       </div>
     );
   }
+  */
 }

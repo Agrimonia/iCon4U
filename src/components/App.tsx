@@ -1,9 +1,7 @@
 import * as React from 'react';
-// import { Button, ButtonType } from 'office-ui-fabric-react';
-// import HeroList, { ListItem } from './HeroList';
 import Progress from './Progress';
-// import Search from './Search';
 import { readFile } from '../loadsvg';
+import NestedPivot from './NestedPivot';
 
 export interface AppProps {
     title: string;
@@ -11,10 +9,10 @@ export interface AppProps {
 }
 /*
 export interface AppState {
-    items: any[];
+    datas: any[];
 }
 */
-export default class App extends React.Component<AppProps> {
+export default class App extends React.Component<AppProps, any> {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -22,10 +20,10 @@ export default class App extends React.Component<AppProps> {
         };
     }
     componentDidMount() {
-        this.setState({
-            datas: new Promise(readFile).then((datas) => {
-                return datas;
-            })
+        new Promise(readFile).then((datas) => {
+            this.setState({
+                datas: datas
+            });
         });
     }
 /*
@@ -57,7 +55,7 @@ export default class App extends React.Component<AppProps> {
 
         return (
             <div className='ms-welcome'>
-                <h1>Welcome</h1>
+                <NestedPivot counts={5} datas={this.state.datas}/>
             </div>
         );
     }
