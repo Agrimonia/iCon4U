@@ -1,51 +1,35 @@
 import * as React from 'react';
-import { Button, ButtonType } from 'office-ui-fabric-react';
-import Header from './Header';
-import HeroList, { HeroListItem } from './HeroList';
+// import { Button, ButtonType } from 'office-ui-fabric-react';
+// import HeroList, { ListItem } from './HeroList';
 import Progress from './Progress';
-
-
+// import Search from './Search';
+import { readFile } from '../loadsvg';
 
 export interface AppProps {
     title: string;
     isOfficeInitialized: boolean;
 }
-
+/*
 export interface AppState {
-    listItems: HeroListItem[];
+    items: any[];
 }
-
-export default class App extends React.Component<AppProps, AppState> {
+*/
+export default class App extends React.Component<AppProps> {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            listItems: []
+            datas: []
         };
     }
-
     componentDidMount() {
         this.setState({
-            listItems: [
-                {
-                    icon: 'Ribbon',
-                    primaryText: 'Achieve more with Office integration'
-                },
-                {
-                    icon: 'Unlock',
-                    primaryText: 'Unlock features and functionality'
-                },
-                {
-                    icon: 'Design',
-                    primaryText: 'Create and visualize like a pro'
-                }
-            ]
+            datas: new Promise(readFile).then((datas) => {
+                return datas;
+            })
         });
     }
-
+/*
     click = async () => {
-        /**
-         * Insert your PowerPoint code here
-         */
         Office.context.document.setSelectedDataAsync('Hello World!', {
             coercionType: Office.CoercionType.Text
         }, result => {
@@ -54,7 +38,7 @@ export default class App extends React.Component<AppProps, AppState> {
             }
         });
     }
-
+*/
     render() {
         const {
             title,
@@ -73,11 +57,7 @@ export default class App extends React.Component<AppProps, AppState> {
 
         return (
             <div className='ms-welcome'>
-                <Header logo='assets/logo-filled.png' title={this.props.title} message='Welcome' />
-                <HeroList message='Discover what iCon4U can do for you today!' items={this.state.listItems}>
-                    <p className='ms-font-l'>Modify the source files, then click <b>Run</b>.</p>
-                    <Button className='ms-welcome__action' buttonType={ButtonType.hero} iconProps={{ iconName: 'ChevronRight' }} onClick={this.click}>Run</Button>
-                </HeroList>
+                <h1>Welcome</h1>
             </div>
         );
     }

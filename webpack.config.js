@@ -8,6 +8,9 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.html', '.js']
     },
+    node: {
+        fs: 'empty'
+    },
     module: {
         rules: [
             {

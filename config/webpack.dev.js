@@ -23,6 +23,9 @@ module.exports = webpackMerge(commonConfig, {
         port: 3000,
         historyApiFallback: true
     },
+    node: {
+        fs: 'empty'
+    },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
     ]
