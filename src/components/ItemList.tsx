@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { SwatchColorPicker } from 'office-ui-fabric-react/lib/SwatchColorPicker';
-// import { Button } from 'office-ui-fabric-react/lib/Button';
+// import { Button } from ;
 // import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone';
-// import { List } from 'office-ui-fabric-react/lib/List';
+// import { Label } from 'office-ui-fabric-react/lib/Label';
 // import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
 // import { svgToBase64 } from '../loadsvg';
 import { windows } from './base64';
@@ -43,26 +43,48 @@ export default class ItemList extends React.Component<any, any> {
     */
   }
   public render(): JSX.Element {
-    return (
-      <div>
-        <button onClick={this.click}>
-          <div className='icon-svg'>
-            <div dangerouslySetInnerHTML={{ __html: this.props.items[1] }} />
+    const {items} = this.props;
+    const ListIcons = items.map( (item) => {
+      // let name = /(?<=id='fa-)(\w*)(?='|-)/g.exec(item)[0];
+      // let name = item.match(/(?<=id='fa-)([a-z]*)(?='|-)/)[1];
+      // let name = 'windows';
+      return (
+      <div className='ms-ListGhostingExample-container' data-is-scrollable={true}>
+        <div className='IconBar'>
+          <button id='iconlogo' onClick={this.click}>
+            <div className='icon-svg'>
+              <div dangerouslySetInnerHTML={{ __html: item }} />
+            </div>
+          </button>
+          <div id='info'>
+              {/*<h2>{/(?<=id='fa-)([a-z]*)(?='|-)/.exec(item)[0]}</h2>*/}
+              <h2>&nbsp;&nbsp;Windows</h2>
+              <div id='colorpicker'>
+                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <img src='https://localhost:3000/assets/kisspng-primary-color.png' height='35' width='35' />
+              </div>
+            <SwatchColorPicker
+              columnCount={3}
+              cellShape={'circle'}
+              colorCells={[
+                { id: 'b', label: 'Black', color: '#000000' },
+                { id: 'g', label: 'Gray', color: '#eaeaea' },
+                { id: 'w', label: 'White', color: '#ffffff' }
+              ]}
+            />
           </div>
-        </button>
-        <SwatchColorPicker
-          columnCount={3}
-          cellShape={'circle'}
-          colorCells={[
-            { id: 'b', label: 'Black', color: '#000000' },
-            { id: 'g', label: 'Gray', color: '#eaeaea' },
-            { id: 'w', label: 'White', color: '#ffffff' }
-          ]}
-        />
+        </div>
+      </div>
+      );
+    });
+    return (
+      <div className='ItemList'>
+        {ListIcons}
       </div>
     );
   }
 }
+
   /*
   public render(): JSX.Element {
     const { items } = this.props;
