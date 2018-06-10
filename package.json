@@ -18,7 +18,7 @@
         "fsjs": "0.0.6",
         "office-ui-fabric-react": "^5.51.0",
         "react": "^16.2.0",
-        "react-dom": "^16.2.0",
+        "react-dom": "^16.2.0"
     },
     "devDependencies": {
         "@types/office-js": "^0.0.51",

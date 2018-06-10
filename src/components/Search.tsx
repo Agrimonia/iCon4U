@@ -89,7 +89,8 @@ export default class Search extends React.Component<any, any> {
   constructor(props) {
     super(props);
     this.state = {
-      result: []
+      result: [],
+      isSearched: false
     };
   }
   /* 希望的输入： window
@@ -117,6 +118,11 @@ export default class Search extends React.Component<any, any> {
     })
   }
   public render(): JSX.Element {
+    const isSearched = this.state.isSearched;
+    let conditionalRendering = null;
+    if (isSearched) {
+      conditionalRendering = <ItemList items={this.state.result} />
+    }
     return (
       <div className='ms-SearchBoxBar'>
         <br/>
@@ -130,14 +136,24 @@ export default class Search extends React.Component<any, any> {
             console.log('Custom onClear Called');
           }}
           */
-          onChange={newValue => console.log('SearchBox onChange fired: ' + newValue)}
+          onChange={newValue => {
+            console.log('SearchBox onChange fired: ' + newValue)
+            this.setState({
+              isSearched: false
+            })
+          }}
           onSearch={newValue => {
             console.log('SearchBox onSearch fired: ' + newValue);
             this.searchResult(newValue);
+            this.setState({
+              isSearched: true
+            })
           }}
-          onBlur={() => console.log('onBlur called')}
+          onBlur={() => {
+            console.log('onBlur called')
+          }}
         />
-        <ItemList items={this.state.result}/>
+        {conditionalRendering}
       </div>
     );
   }
