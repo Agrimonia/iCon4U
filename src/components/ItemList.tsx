@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Button } from 'office-ui-fabric-react/lib/Button';
+// import { Button } from 'office-ui-fabric-react/lib/Button';
 // import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone';
 // import { List } from 'office-ui-fabric-react/lib/List';
 // import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
-// import {svgToBase64} from '../loadsvg';
+// import { svgToBase64 } from '../loadsvg';
 export interface IconListProps {
   items: any[];
 }
@@ -15,9 +15,8 @@ export default class ItemList extends React.Component<any, any> {
       iconList: []
     };
   }
+  /*
   click = async () => {
-    //TODO: 插入图片
-    /*
     svgToBase64(this.props.items[0], (base64) => {
       Office.context.document.setSelectedDataAsync(base64, {
         coercionType: Office.CoercionType.Image
@@ -27,17 +26,17 @@ export default class ItemList extends React.Component<any, any> {
         }
       });
     });
-    */
   }
-
+*/
   public render(): JSX.Element {
     return (
       <div className='icon-svg'>
-        <div dangerouslySetInnerHTML={{ __html: this.props.items[0] }} />
-        <Button className='ms-welcome__action' onClick={this.click}>Run</Button>
+        <div dangerouslySetInnerHTML={{ __html: this.props.items[1] }} />
+        <button onClick={() => console.log('click')}>run</button>
       </div>
     );
   }
+}
   /*
   public render(): JSX.Element {
     const { items } = this.props;
@@ -61,5 +60,5 @@ export default class ItemList extends React.Component<any, any> {
     );
   }
   */
-}
+
 
