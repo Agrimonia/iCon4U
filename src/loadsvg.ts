@@ -1,17 +1,20 @@
 import * as fs from 'fs';
 const xml2js = require('xml2js');
 let parser = new xml2js.Parser();
+let datas = [];
 export function readFile(resolve, _reject) {
-  fs.readFile('fontawesome-webfont.svg', (_err, data) => {
+  fs.readFile('/Users/agrimonia/icon4u/fontawesome-webfont.svg', (_err, data) => {
     parser.parseString(data, (_err, result) => {
-      let datas = [];
       let strings = result.svg.defs[0].font[0].glyph;
       for (let i = 0; i < strings.length; i++) {
-        datas.push(strings[i].$);
+        datas.push(strings[i].$['glyph-name']);
       }
       resolve(datas);
     });
   });
+}
+export function getDatas() {
+  return datas;
 }
 export function svgToBase64(svg, callback) {
   let href = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svg)));

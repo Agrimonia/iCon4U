@@ -1,21 +1,41 @@
 import * as React from 'react';
+import { Button } from 'office-ui-fabric-react/lib/Button';
 // import { FocusZone, FocusZoneDirection } from 'office-ui-fabric-react/lib/FocusZone';
 // import { List } from 'office-ui-fabric-react/lib/List';
 // import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
-
+// import {svgToBase64} from '../loadsvg';
 export interface IconListProps {
   items: any[];
 }
 
-export default class ItemList extends React.Component<IconListProps, {}> {
-  constructor(props: IconListProps) {
+export default class ItemList extends React.Component<any, any> {
+  constructor(props) {
     super(props);
+    this.state = {
+      iconList: []
+    };
   }
-  public render(): JSX.Element {
-    const { items } = this.props;
+  click = async () => {
+    //TODO: 插入图片
+    /*
+    svgToBase64(this.props.items[0], (base64) => {
+      Office.context.document.setSelectedDataAsync(base64, {
+        coercionType: Office.CoercionType.Image
+      }, result => {
+        if (result.status === Office.AsyncResultStatus.Failed) {
+          console.error(result.error.message);
+        }
+      });
+    });
+    */
+  }
 
+  public render(): JSX.Element {
     return (
-      <h1>{items}</h1>
+      <div className='icon-svg'>
+        <div dangerouslySetInnerHTML={{ __html: this.props.items[0] }} />
+        <Button className='ms-welcome__action' onClick={this.click}>Run</Button>
+      </div>
     );
   }
   /*
@@ -31,22 +51,15 @@ export default class ItemList extends React.Component<IconListProps, {}> {
     );
   }
 
-  private _onRenderCell(item: any, index: number, isScrolling: boolean): JSX.Element {
+  private _onRenderCell(): JSX.Element {
     return (
       <div className='ms-ListGhostingExample-itemCell' data-is-focusable={true}>
-        <Image
-          className='ms-ListGhostingExample-itemImage'
-          src={isScrolling ? undefined : item.thumbnail}
-          width={50}
-          height={50}
-          imageFit={ImageFit.cover}
-        />
-        <div className='ms-ListGhostingExample-itemContent'>
-          <div className='ms-ListGhostingExample-itemName'>{item.name}</div>
-          <div className='ms-ListGhostingExample-itemIndex'>{`Item ${index}`}</div>
+        <div className='icon-svg'>
+          <div dangerouslySetInnerHTML={{ __html: this.props.items[0] }} />
         </div>
       </div>
     );
   }
   */
 }
+

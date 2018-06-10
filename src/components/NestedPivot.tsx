@@ -14,8 +14,8 @@ export default class PivotFabricExample extends React.Component<any, any> {
     return (
       <div>
         <Pivot linkFormat={PivotLinkFormat.links} linkSize={PivotLinkSize.large}>
-          <PivotItem linkText='For You' itemCount={this.props.counts} itemIcon='heart'>
-            <Label>Icon Page</Label>
+          <PivotItem linkText='For You' itemIcon='heart'>
+            <Label>{this.props.datas}</Label>
           </PivotItem>
           <PivotItem linkText='Search' itemIcon='search'>
             <Search datas={this.props.datas}/>
