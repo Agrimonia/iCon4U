@@ -6,7 +6,6 @@ import { SwatchColorPicker } from 'office-ui-fabric-react/lib/SwatchColorPicker'
 // import { Image, ImageFit } from 'office-ui-fabric-react/lib/Image';
 // import { svgToBase64 } from '../loadsvg';
 import { windows } from './base64';
-
 export interface IconListProps {
   items: any[];
 }
@@ -18,38 +17,25 @@ export default class ItemList extends React.Component<any, any> {
       iconList: []
     };
   }
+  svgToBase64 = () => {return windows; };
+
   click = async () => {
     console.log('click');
-    Office.context.document.setSelectedDataAsync(windows, {
+    Office.context.document.setSelectedDataAsync(this.svgToBase64(), {
       coercionType: Office.CoercionType.Image,
-      imageLeft: 50,
-      imageTop: 50,
-      imageWidth: 400
+      imageWidth: 200
     }, (asyncResult) => {
         if (asyncResult.status === Office.AsyncResultStatus.Failed) {
           console.log(asyncResult.error.message);
         }
       });
-    /*
-    svgToBase64(this.props.items[0], (_base64) => {
-      Office.context.document.setSelectedDataAsync(_base64, {
-        coercionType: Office.CoercionType.Image
-      }, result => {
-        if (result.status === Office.AsyncResultStatus.Failed) {
-          console.error(result.error.message);
-        }
-      });
-    });
-    */
   }
   public render(): JSX.Element {
     const {items} = this.props;
-    const ListIcons = items.map( (item) => {
-      // let name = /(?<=id='fa-)(\w*)(?='|-)/g.exec(item)[0];
-      // let name = item.match(/(?<=id='fa-)([a-z]*)(?='|-)/)[1];
-      // let name = 'windows';
+    const ListIcons = items.map( (item, index) => {
+      // let name = item.match(/(?:id='fa-)(\S*)/)[1];
       return (
-      <div className='ms-ListGhostingExample-container' data-is-scrollable={true}>
+      <div key={index} className='ms-ListGhostingExample-container' data-is-scrollable={true}>
         <div className='IconBar'>
           <button id='iconlogo' onClick={this.click}>
             <div className='icon-svg'>
@@ -57,10 +43,8 @@ export default class ItemList extends React.Component<any, any> {
             </div>
           </button>
           <div id='info'>
-              {/*<h2>{/(?<=id='fa-)([a-z]*)(?='|-)/.exec(item)[0]}</h2>*/}
-              <h2>&nbsp;&nbsp;Windows</h2>
+              <h2>{/(?:id='fa-)(\S*)/.exec(item)[0].slice(7, -1)}</h2>
               <div id='colorpicker'>
-                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 <img src='https://localhost:3000/assets/kisspng-primary-color.png' height='35' width='35' />
               </div>
             <SwatchColorPicker
