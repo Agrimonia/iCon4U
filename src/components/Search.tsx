@@ -1,10 +1,14 @@
 import * as React from 'react';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 // import './SearchBox.Small.Example.scss';
-import { fontawesome } from './data';
+import { fontawesome } from '../data';
 import ItemList from './ItemList';
 
-export default class Search extends React.Component<any, any> {
+interface SearchState {
+  result: string[],
+  isSearched: boolean
+}
+export default class Search extends React.Component<undefined, SearchState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +45,7 @@ export default class Search extends React.Component<any, any> {
     const isSearched = this.state.isSearched;
     let isRendering = null;
     if (isSearched) {
-      isRendering = <ItemList items={this.state.result} />;
+      isRendering = <ItemList result={this.state.result} />;
     }
     return (
       <div className='ms-SearchBoxBar'>
