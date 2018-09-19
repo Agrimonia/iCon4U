@@ -8,7 +8,7 @@ interface SearchState {
   result: string[],
   isSearched: boolean
 }
-export default class Search extends React.Component<undefined, SearchState> {
+export default class Search extends React.Component<any, SearchState> {
   constructor(props) {
     super(props);
     this.state = {

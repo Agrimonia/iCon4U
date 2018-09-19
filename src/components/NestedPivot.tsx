@@ -4,7 +4,7 @@ import { PivotLinkSize, PivotLinkFormat, PivotItem, Pivot } from 'office-ui-fabr
 import Search from './Search';
 
 
-export default class PivotFabricExample extends React.Component {
+export default class NestedPivot extends React.Component {
   constructor(props) {
     super(props);
   }
