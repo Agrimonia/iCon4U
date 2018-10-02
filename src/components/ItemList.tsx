@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Item from './item';
+import './itemList.less';
 
 interface IconListProps {
   result: string[];
